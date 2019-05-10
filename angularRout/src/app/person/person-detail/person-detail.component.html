@@ -1,0 +1,62 @@
+<div *ngIf="!editMode" class="row">
+    <div class="col-12 col-md-4">
+      <div class="card">
+        <img class="card-img" src="https://image.tmdb.org/t/p/w200{{ person.imagePath }}" alt="">
+      </div>
+    </div>
+    &nbsp;
+    <div class="col-12 col-md-7">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">{{ person?.name }}</h5>
+          <button type="button" class="btn btn-danger float-right" (click)="deletePerson(person?.id)">Delete</button>
+          <button type="button" class="btn btn-primary float-right" (click)="editMode=true">Edit</button>
+        </div>
+        <div class="card-body">
+          <p class="card-title text-justify"><strong>Hometown:</strong> {{ person?.homeTown }}</p>
+          <p class="card-title text-justify"><strong>Height:</strong> {{ person?.height }}</p>
+          <p class="card-title text-justify"><strong>Country of Residence:</strong> {{ person?.livingCountry }}</p>
+          <p class="card-title text-justify"><strong>Gender:</strong> {{ gender(person?.gender) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="editMode" class="container">
+      <h1>Edit Person</h1>
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input #name value="{{person?.name}}" type="text" class="form-control" id="name" required>
+        </div>
+   
+        <div class="form-group">
+          <label for="homeTown">Hometown</label>
+          <input #homeTown value="{{person?.homeTown}}" type="text" class="form-control" id="homeTown">
+        </div>
+  
+        <div class="form-group">
+          <label for="height">Height</label>
+          <input #height value="{{person?.height}}" type="number" class="form-control" id="height">
+        </div>
+  
+        <div class="form-group">
+            <label for="livingCountry">Country of Residence</label>
+            <input #livingCountry value="{{person?.livingCountry}}" type="text" class="form-control" id="livingCountry">
+        </div>
+  
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <input #gender value="{{movie?.gender}}" type="number" class="form-control" id="gender">
+        </div>
+   
+        <button class="btn btn-success" 
+        (click)="updatePerson({name: name.value,
+                              homeTown: homeTown.value, 
+                              livingCountry: livingCountry.value, 
+                              gender: gender.value})">Submit</button>
+        <button class="btn btn-danger float-left" (click)="editMode=false">Cancel</button>                      
+        
+        
+      </form>
+  </div>

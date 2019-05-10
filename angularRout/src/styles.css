@@ -1,0 +1,15 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.card  {
+        cursor: pointer;
+}
+.card-header {
+    background: transparent;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+
+}

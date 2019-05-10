@@ -1,0 +1,116 @@
+<div *ngIf="!editMode" class="row">
+  <div class="col-12 col-md-4">
+    <div class="card">
+      <img class="card-img" src="https://image.tmdb.org/t/p/w250_and_h141_face{{ serie?.imgPath }}" alt="">
+    </div>
+  </div>
+  &nbsp;
+  <div class="col-12 col-md-7">
+    <router-outlet></router-outlet>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">{{ serie?.title }} ({{ serie?.yearOfRelease}})</h5>
+        <button type="button" class="btn btn-danger float-right" (click)="deleteSerie(serie?.id)">Delete</button>
+        <button type="button" class="btn btn-primary float-right" (click)="editMode=true">Edit</button>
+      </div>
+      <div class="card-body">
+        <p class="card-title text-justify"><strong>Description:</strong> {{ serie?.description }}</p>
+        <p class="card-title text-justify"><strong>Country of Origin:</strong> {{ serie?.homeCountry }}</p>
+        <p class="card-title text-justify"><strong>Language:</strong> {{ serie?.language }}</p>
+        <p class="card-title text-justify"><strong>Episode Duration:</strong> {{ serie?.duration }} min</p>
+        <p class="card-title text-justify"><strong>Number of Seasons:</strong> {{ serie?.numberOfSeasons }}</p>
+        <p><strong>Genres:</strong> </p>
+        <div class="d-inline-block" *ngFor="let genre of serie?.genres">
+          <span class="badge badge-pill badge-primary">{{ genre }}</span>
+        </div>
+        <br /> <br />
+        <p><strong>Cast:</strong> </p>
+        <div class="d-inline-block" *ngFor="let person of serie?.cast">
+          <span class="badge badge-pill badge-primary">{{ person.name }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="editMode" class="container">
+    <h1>Edit Serie</h1>
+    <form>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input #title value="{{serie?.title}}" type="text" class="form-control" id="title" required>
+      </div>
+ 
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input #description value="{{serie?.description}}" type="text" class="form-control" id="description">
+      </div>
+
+      <div class="form-group">
+        <label for="yearOfRelease">Year of Release</label>
+        <input #yearOfRelease value="{{serie?.yearOfRelease}}" type="number" class="form-control" id="yearOfRelease">
+      </div>
+
+      <div class="form-group">
+          <label for="homeCountry">Country of Origin</label>
+          <input #homeCountry value="{{serie?.homeCountry}}" type="text" class="form-control" id="homeCountry">
+      </div>
+
+      <div class="form-group">
+          <label for="language">Language</label>
+          <input #language value="{{serie?.language}}" type="text" class="form-control" id="language">
+      </div>
+
+      <div class="form-group">
+          <label for="duration">Duration</label>
+          <input #duration value="{{serie?.duration}}" type="number" class="form-control" id="duration">
+      </div>
+
+      <div class="form-group">
+          <label for="numberOfSeasons">Number of Seasons</label>
+          <input #numberOfSeasons value="{{serie?.numberOfSeasons}}" type="number" class="form-control" id="numberOfSeasons">
+      </div>
+
+      <div class="form-group">
+          <label for="genres">Genre</label>
+          <ul>
+            <li *ngFor="let genre of serie?.genres; let i = index">{{genre}}
+                <button type="button" class="btn btn-danger" (click)="serie?.genres.splice(i, 1)">Delete</button>
+            </li>
+          </ul>
+      </div>
+
+      <div class="form-group">
+          <label for="genre">Add Genre</label>
+          <input #input type="text" class="form-control" id="genre">
+          <button type="button" class="btn btn-primary" (click) ="serie?.genres.push(input.value)" >Add</button>
+      </div>
+
+      <div class="form-group">
+          <label for="cast">Cast</label>
+          <ul>
+            <li *ngFor="let person of serie?.cast; let i = index">{{person?.name}}
+                <button type="button" class="btn btn-danger" (click)="serie?.cast.splice(i, 1)">Delete</button>
+            </li>
+          </ul>
+      </div>
+
+      <div class="form-group">
+          <label for="personId">Add person by ID</label>
+          <input #input1 type="number" class="form-control" id="personId">
+          <button type="button" class="btn btn-primary" (click) ="insertPerson(input1.value)" >Add</button>
+      </div>
+ 
+      <button class="btn btn-success" 
+      (click)="updateSerie({title: title.value,
+                            description: description.value, 
+                            yearOfRelease: yearOfRelease.value, 
+                            homeCountry: homeCountry.value,
+                            language: language.value,
+                            duration: duration.value,
+                            numberOfSeasons: numberOfSeasons.value})">Submit</button>
+      <button class="btn btn-danger float-left" (click)="editMode=false">cancel</button>                      
+      
+      
+    </form>
+</div>

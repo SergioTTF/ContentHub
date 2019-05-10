@@ -1,0 +1,13 @@
+<div class="col-12">
+  <input #inputText class="form-control" (keyup.enter)="searchMovie(inputText.value)" type="text" placeholder="Search" aria-label="Search">
+  <br>
+  <div class="card-columns">
+    <div class="card bg-dark text-white" (click)="goEdit(movie)" *ngFor="let movie of movies">
+     <img class="card-img"
+          src="https://image.tmdb.org/t/p/w250_and_h141_face{{ movie.imgPath }}" alt="_blank" />
+      <div class="card-img-overlay">
+        <p class="card-title">{{ movie.title }}</p>
+      </div>
+    </div>
+  </div>
+</div>

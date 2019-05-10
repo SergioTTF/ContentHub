@@ -1,0 +1,12 @@
+<div class="col-12">
+  <input #inputText class="form-control" (keyup.enter)="searchSerie(inputText.value)" type="text" placeholder="Search" aria-label="Search">
+  <br>
+  <div class="card-columns">
+    <div class="card bg-dark text-white" (click)="goEdit(serie)" *ngFor="let serie of series">
+      <img class="card-img" src="https://image.tmdb.org/t/p/w250_and_h141_face{{ serie?.imgPath }}" alt="_blank" />
+      <div class="card-img-overlay">
+        <p class="card-title">{{ serie?.title }}</p>
+      </div>
+    </div>
+  </div>
+</div>
