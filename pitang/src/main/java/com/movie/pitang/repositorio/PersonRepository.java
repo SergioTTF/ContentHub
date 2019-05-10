@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person,Long> {
-    Page<Person> findByNameLike(String name, Pageable pageable);
+    Page<Person> findByNameContaining(String name, Pageable pageable);
     Person findByName(String name);
 }

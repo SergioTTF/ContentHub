@@ -19,6 +19,9 @@ export class PersonService extends BaseService {
   deletePerson(id:Number){
     return this._httpClient.delete(`${this.URL}/people/${id}`)
   }
+  getSearch(text: string){
+    return this._httpClient.get(`${this.URL}/people/filter/?name=${text}`)
+  }
 
   getById(id: Number) {
     return this._httpClient.get(`${this.URL}/people/${id}`)

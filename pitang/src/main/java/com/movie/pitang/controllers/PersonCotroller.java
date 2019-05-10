@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.apache.commons.text.WordUtils;
 
 import javax.validation.Valid;
 import java.util.LinkedHashMap;
@@ -45,7 +46,7 @@ public class PersonCotroller {
 
     @GetMapping(path = "/filter/")
     public ResponseEntity<?> getPersonByName(Pageable pageable, @RequestParam(value = "name") String name) {
-        Page<Person> personPage = personRepository.findByNameLike(name, pageable);
+        Page<Person> personPage = personRepository.findByNameContaining(WordUtils.capitalize(name), pageable);
         return new ResponseEntity<>(personPage, HttpStatus.OK);
 
     }

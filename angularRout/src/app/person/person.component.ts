@@ -23,4 +23,12 @@ export class PersonComponent implements OnInit {
     this._router.navigate(['people/details', person.id])
   }
 
+  searchPerson(text:string){
+    this._personService.getSearch(text).subscribe(
+      response => {
+        this.people = response['content'];
+      }
+    )
+  }
+
 }
