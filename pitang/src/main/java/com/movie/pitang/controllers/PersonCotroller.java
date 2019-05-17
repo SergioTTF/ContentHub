@@ -64,7 +64,7 @@ public class PersonCotroller {
         if (response.isPresent()) {
             person.setId(id);
             personRepository.save(person);
-            return new ResponseEntity<>(response.get(), HttpStatus.OK);
+            return new ResponseEntity<>(person, HttpStatus.OK);
         } else {
             throw new ResourceNotFoundException("There is no person with this id");
         }

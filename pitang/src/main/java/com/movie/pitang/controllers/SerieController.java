@@ -67,7 +67,7 @@ public class SerieController  {
         if (optionalSerie.isPresent()){
             serie.setId(id);
             serieRepository.save(serie);
-            return new ResponseEntity<>(optionalSerie.get(), HttpStatus.OK);
+            return new ResponseEntity<>(serie, HttpStatus.OK);
         } else {
             throw new ResourceNotFoundException("There is no tv serie with this id");
         }
@@ -90,7 +90,7 @@ public class SerieController  {
         List<Object> list = getTrendingObjects("tv");
         for (Object o:list){
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -142,6 +142,11 @@ public class SerieController  {
                         Map<String, Object> mapCast = getJson("person",(Integer) personLinkedMap.get("id"));
                         if (mapCast!=null && personRepository.findByName((String)mapCast.get("name"))==null){
                             cast.add(persistPerson(mapCast));
+                        }
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
                     serie.setCast(cast);
